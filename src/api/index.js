@@ -2,8 +2,8 @@
 import { createAPI } from 'create-api'
 
 
-const logRequests = true
-// const logRequests = !!process.env.DEBUG_API
+// const logRequests = true
+const logRequests = !!process.env.DEBUG_API
 
 const api = createAPI({
   version: '/v0',

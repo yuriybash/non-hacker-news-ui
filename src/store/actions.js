@@ -41,11 +41,6 @@ export default {
     })
     if (ids.length) {
       return fetchItems(ids).then(function(items){
-        // console.log("items::::", items)
-        console.log("url: ");
-        console.log(url);
-
-
         let url_title_pairs = [];
         for (var i = 0; i < items.length; i++) {
 
@@ -59,7 +54,7 @@ export default {
             domain = "a"
           }
 
-          console.log("title: "+ title + ", domain: " + domain);
+          // console.log("title: "+ title + ", domain: " + domain);
           url_title_pairs.push([title, domain])
         }
 
@@ -71,20 +66,16 @@ export default {
           }
         };
 
-        console.log("sending sync request");
+        // console.log("sending sync request");
         var response = sync_request('POST', 'https://si6k7q7byd.execute-api.us-east-1.amazonaws.com/dev', {
           json: {data: url_title_pairs},
         });
 
-        console.log('sync response received');
+        // console.log('sync response received');
 
 
         var predictions = JSON.parse(response.getBody('utf8'))['prediction'];
-
-
-        predictions[0] = 1
-        predictions[3] = 1
-        predictions[11] = 1
+        console.log("number of article matches: " + predictions.reduce((a, b) => a + b, 0));
 
         items = items.filter((item, idx, arr) => predictions[idx] === 1);
 
