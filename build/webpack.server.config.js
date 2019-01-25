@@ -12,6 +12,11 @@ module.exports = merge(base, {
     filename: 'server-bundle.js',
     libraryTarget: 'commonjs2'
   },
+  node: {
+    fs: "empty",
+    net: "empty",
+    tls: "empty"
+  },
   resolve: {
     alias: {
       'create-api': './create-api-server.js'

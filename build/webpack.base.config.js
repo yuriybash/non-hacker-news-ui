@@ -62,6 +62,11 @@ module.exports = {
       },
     ]
   },
+  node: {
+    fs: "empty",
+    net: "empty",
+    tls: "empty"
+  },
   performance: {
     hints: false
   },

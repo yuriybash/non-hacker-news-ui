@@ -1,7 +1,9 @@
 // this is aliased in webpack config based on server/client build
 import { createAPI } from 'create-api'
 
-const logRequests = !!process.env.DEBUG_API
+
+const logRequests = true
+// const logRequests = !!process.env.DEBUG_API
 
 const api = createAPI({
   version: '/v0',
@@ -22,6 +24,8 @@ function warmCache () {
 }
 
 function fetch (child) {
+  // console.log("child in fetch: " + typeof(child) + child);
+
   logRequests && console.log(`fetching ${child}...`)
   const cache = api.cachedItems
   if (cache && cache.has(child)) {

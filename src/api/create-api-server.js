@@ -5,6 +5,10 @@ export function createAPI ({ config, version }) {
   let api
   // this piece of code may run multiple times in development mode,
   // so we attach the instantiated API to `process` to avoid duplications
+
+  console.log("in createAPI");
+  console.log(config);
+
   if (process.__API__) {
     api = process.__API__
   } else {
@@ -21,7 +25,8 @@ export function createAPI ({ config, version }) {
 
     // cache the latest story ids
     api.cachedIds = {}
-    ;['top', 'new', 'show', 'ask', 'job'].forEach(type => {
+    // ;['top', 'new', 'show', 'ask', 'job'].forEach(type => {
+      ;['top', 'new'].forEach(type => {
       api.child(`${type}stories`).on('value', snapshot => {
         api.cachedIds[type] = snapshot.val()
       })
